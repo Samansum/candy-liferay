@@ -1,0 +1,4 @@
+Bundle-Name: candy-portlet
+Bundle-SymbolicName: com.candy.docs
+Bundle-Version: 1.0.0
+Export-Package: com.candy.docs.constants
