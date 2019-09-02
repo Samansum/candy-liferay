@@ -4,6 +4,12 @@
 	<p>A friendly reversible message from Vue.js:</p>
 	<p>{{message}}</p>
 	<button v-on:click="reverseMessage">Reverse message, pretty please</button>
+
+	<div v-for="item in myData">
+	    <label :for="item.id">{{item.name}}</label>
+	    <input type="radio" v-model="checkedImage" :id="item.id" :value="item.id" />
+    </div>
+    <h1>{{checkedImage}}</h1>
 </div>
 
 <hr />
@@ -20,5 +26,5 @@
 </div>
 
 <aui:script require="<%= mainRequire %>">
-	main.default('<portlet:namespace />');
+	main.default('<portlet:namespace />', '<%=candyDisplayContext.getDataAsJson()%>');
 </aui:script>

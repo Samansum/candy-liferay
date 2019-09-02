@@ -1,17 +1,18 @@
 import Vue from 'vue/dist/vue.common';
 
-export default function(portletNamespace) {
+export default function(portletNamespace, candyData) {
 	new Vue({
 		el: `#${portletNamespace}candy`,
 		data: {
 			message: 'Hello from Vue.js!',
+			myData: JSON.parse(candyData),
+			checkedImage: ''
 		},
+
 		methods: {
 			reverseMessage: function() {
 				this.message = this.message
-					.split('')
-					.reverse()
-					.join('');
+					.split(' ')[0];
 			},
 		},
 	});

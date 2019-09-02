@@ -1,19 +1,16 @@
 package com.candy.docs.portlet;
 
 import com.candy.docs.constants.CandyPortletKeys;
-
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-
-import java.io.IOException;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
+import java.io.IOException;
 
 /**
  * @author candy
@@ -40,7 +37,7 @@ public class CandyPortlet extends MVCPortlet {
 
 		renderRequest.setAttribute(
 			"mainRequire",
-			_npmResolver.resolveModuleName("candy-npm-portlet") + " as main");
+				_npmResolver.resolveModuleName("candy-npm-portlet") + "/js/main.es as main");
 
 		super.doView(renderRequest, renderResponse);
 	}
