@@ -6,7 +6,8 @@ export default function(portletNamespace, candyData) {
 		data: {
 			message: 'Hello from Vue.js!',
 			myData: JSON.parse(candyData),
-			checkedImage: ''
+			checkedImage: '',
+			selectedProtocol: 'https://'
 		},
 
 		methods: {
@@ -17,19 +18,4 @@ export default function(portletNamespace, candyData) {
 		},
 	});
 
-	Vue.component('todo-item', {
-		props: ['todo'],
-		template: '<li>{{ todo.text }}</li>',
-	});
-
-	new Vue({
-		el: `#${portletNamespace}-2`,
-		data: {
-			groceryList: [
-				{ id: 0, text: 'Vegetables' },
-				{ id: 1, text: 'Cheese' },
-				{ id: 2, text: 'Whatever else humans are supposed to eat' },
-			],
-		},
-	});
 }

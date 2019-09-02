@@ -10,19 +10,13 @@
 	    <input type="radio" v-model="checkedImage" :id="item.id" :value="item.id" />
     </div>
     <h1>{{checkedImage}}</h1>
-</div>
 
-<hr />
+    <select v-model="selectedProtocol">
+        <option>https://</option>
+        <option>http://</option>
+    </select>
 
-<div id="<portlet:namespace />-2">
-	<p>A to do list made with Vue.js components:</p>
-	<ol>
-		<todo-item
-			v-bind:key="item.id"
-			v-bind:todo="item"
-			v-for="item in groceryList"
-		/>
-	</ol>
+    <h1>{{selectedProtocol}}</h1>
 </div>
 
 <aui:script require="<%= mainRequire %>">
