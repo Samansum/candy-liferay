@@ -14,6 +14,7 @@
 .gradle
 .idea
 /bundles
+/modules/**/package-lock.json
 /gradle-*.properties
 /plugins-sdk/**/classes
 /plugins-sdk/**/ivy.xml.MD5
