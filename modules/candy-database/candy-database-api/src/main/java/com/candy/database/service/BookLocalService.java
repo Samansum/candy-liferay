@@ -1,18 +1,21 @@
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
- * <p>
- * This library is free software; you can redistribute it and/or modify it under the terms of the
- * GNU Lesser General Public License as published by the Free Software Foundation; either version
- * 2.1 of the License, or (at your option) any later version.
- * <p>
- * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
  */
 
 package com.candy.database.service;
 
 import aQute.bnd.annotation.ProviderType;
+import com.candy.database.exception.NoSuchBookException;
 import com.candy.database.model.Book;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -30,6 +33,7 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -73,6 +77,9 @@ public interface BookLocalService extends BaseLocalService,
   @Transactional(enabled = false)
   public Book createBook (long bookId);
 
+  public Book createBook (String bookTitle, String authorName,
+      Date publishedDate);
+
   /**
    * Deletes the book from the database. Also notifies the appropriate model listeners.
    *
@@ -83,7 +90,8 @@ public interface BookLocalService extends BaseLocalService,
   public Book deleteBook (Book book);
 
   /**
-   * Deletes the book with the primary key from the database. Also notifies the appropriate model listeners.
+   * Deletes the book with the primary key from the database. Also notifies the appropriate model
+   * listeners.
    *
    * @param bookId the primary key of the book
    * @return the book that was removed
@@ -115,12 +123,23 @@ public interface BookLocalService extends BaseLocalService,
    * Performs a dynamic query on the database and returns a range of the matching rows.
    *
    * <p>
-   * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.candy.database.model.impl.BookModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+   * Useful when paginating results. Returns a maximum of <code>end - start</code> instances.
+   * <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result
+   * set. Thus, <code>0</code> refers to the first result in the set. Setting both
+   * <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}
+   * will return the full result set. If <code>orderByComparator</code> is specified, then the query
+   * will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and
+   * pagination is required (<code>start</code> and <code>end</code> are not {@link
+   * com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default
+   * ORDER BY logic from {@link com.candy.database.model.impl.BookModelImpl}. If both
+   * <code>orderByComparator</code> and pagination are absent, for performance reasons, the query
+   * will not have an ORDER BY clause and the returned result set will be sorted on by the primary
+   * key in an ascending order.
    * </p>
    *
    * @param dynamicQuery the dynamic query
-   * @param start the lower bound of the range of model instances
-   * @param end the upper bound of the range of model instances (not inclusive)
+   * @param start        the lower bound of the range of model instances
+   * @param end          the upper bound of the range of model instances (not inclusive)
    * @return the range of matching rows
    */
   @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -131,12 +150,23 @@ public interface BookLocalService extends BaseLocalService,
    * Performs a dynamic query on the database and returns an ordered range of the matching rows.
    *
    * <p>
-   * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.candy.database.model.impl.BookModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+   * Useful when paginating results. Returns a maximum of <code>end - start</code> instances.
+   * <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result
+   * set. Thus, <code>0</code> refers to the first result in the set. Setting both
+   * <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}
+   * will return the full result set. If <code>orderByComparator</code> is specified, then the query
+   * will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and
+   * pagination is required (<code>start</code> and <code>end</code> are not {@link
+   * com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default
+   * ORDER BY logic from {@link com.candy.database.model.impl.BookModelImpl}. If both
+   * <code>orderByComparator</code> and pagination are absent, for performance reasons, the query
+   * will not have an ORDER BY clause and the returned result set will be sorted on by the primary
+   * key in an ascending order.
    * </p>
    *
-   * @param dynamicQuery the dynamic query
-   * @param start the lower bound of the range of model instances
-   * @param end the upper bound of the range of model instances (not inclusive)
+   * @param dynamicQuery      the dynamic query
+   * @param start             the lower bound of the range of model instances
+   * @param end               the upper bound of the range of model instances (not inclusive)
    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
    * @return the ordered range of matching rows
    */
@@ -157,7 +187,7 @@ public interface BookLocalService extends BaseLocalService,
    * Returns the number of rows matching the dynamic query.
    *
    * @param dynamicQuery the dynamic query
-   * @param projection the projection to apply to the query
+   * @param projection   the projection to apply to the query
    * @return the number of rows matching the dynamic query
    */
   @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -166,6 +196,17 @@ public interface BookLocalService extends BaseLocalService,
 
   @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
   public Book fetchBook (long bookId);
+
+  public List<Book> findAllBooks () throws NoSuchBookException;
+
+  public List<Book> findBookByAuthor (String authorName)
+      throws NoSuchBookException;
+
+  public List<Book> findBookByPublishedDate (Date date)
+      throws NoSuchBookException;
+
+  public List<Book> findByAuthorAndPublishedDate (String authorName,
+      Date publishedDate) throws NoSuchBookException;
 
   @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
   public ActionableDynamicQuery getActionableDynamicQuery ();
@@ -184,11 +225,22 @@ public interface BookLocalService extends BaseLocalService,
    * Returns a range of all the books.
    *
    * <p>
-   * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.candy.database.model.impl.BookModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+   * Useful when paginating results. Returns a maximum of <code>end - start</code> instances.
+   * <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result
+   * set. Thus, <code>0</code> refers to the first result in the set. Setting both
+   * <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}
+   * will return the full result set. If <code>orderByComparator</code> is specified, then the query
+   * will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and
+   * pagination is required (<code>start</code> and <code>end</code> are not {@link
+   * com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default
+   * ORDER BY logic from {@link com.candy.database.model.impl.BookModelImpl}. If both
+   * <code>orderByComparator</code> and pagination are absent, for performance reasons, the query
+   * will not have an ORDER BY clause and the returned result set will be sorted on by the primary
+   * key in an ascending order.
    * </p>
    *
    * @param start the lower bound of the range of books
-   * @param end the upper bound of the range of books (not inclusive)
+   * @param end   the upper bound of the range of books (not inclusive)
    * @return the range of books
    */
   @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -218,11 +270,15 @@ public interface BookLocalService extends BaseLocalService,
       throws PortalException;
 
   /**
-   * Updates the book in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+   * Updates the book in the database or adds it if it does not yet exist. Also notifies the
+   * appropriate model listeners.
    *
    * @param book the book
    * @return the book that was updated
    */
   @Indexable(type = IndexableType.REINDEX)
   public Book updateBook (Book book);
+
+  public Book updateBook (long bookId, String bookTitle, String authorName,
+      Date publishedDate) throws NoSuchBookException;
 }

@@ -1,13 +1,15 @@
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
- * <p>
- * This library is free software; you can redistribute it and/or modify it under the terms of the
- * GNU Lesser General Public License as published by the Free Software Foundation; either version
- * 2.1 of the License, or (at your option) any later version.
- * <p>
- * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
  */
 
 package com.candy.database.model;
@@ -29,26 +31,25 @@ import com.liferay.portal.kernel.util.Accessor;
 @ImplementationClassName("com.candy.database.model.impl.BookImpl")
 @ProviderType
 public interface Book extends BookModel, PersistedModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify this interface directly. Add methods to {@link com.candy.database.model.impl.BookImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
+	public static final Accessor<Book, Long> BOOK_ID_ACCESSOR = new Accessor<Book, Long>() {
+		@Override
+		public Long get (Book book) {
+			return book.getBookId();
+		}
 
-  /*
-   * NOTE FOR DEVELOPERS:
-   *
-   * Never modify this interface directly. Add methods to {@link com.candy.database.model.impl.BookImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
-   */
-  public static final Accessor<Book, Long> BOOK_ID_ACCESSOR = new Accessor<Book, Long>() {
-    @Override
-    public Long get (Book book) {
-      return book.getBookId();
-    }
+		@Override
+		public Class<Long> getAttributeClass () {
+			return Long.class;
+		}
 
-    @Override
-    public Class<Long> getAttributeClass () {
-      return Long.class;
-    }
-
-    @Override
-    public Class<Book> getTypeClass () {
-      return Book.class;
-    }
-  };
+		@Override
+		public Class<Book> getTypeClass () {
+			return Book.class;
+		}
+	};
 }

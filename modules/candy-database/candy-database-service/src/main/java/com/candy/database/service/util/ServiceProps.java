@@ -1,13 +1,15 @@
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
- * <p>
- * This library is free software; you can redistribute it and/or modify it under the terms of the
- * GNU Lesser General Public License as published by the Free Software Foundation; either version
- * 2.1 of the License, or (at your option) any later version.
- * <p>
- * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
  */
 
 package com.candy.database.service.util;
@@ -26,47 +28,47 @@ import java.util.Properties;
 public class ServiceProps {
 
   public static void addProperties (Properties properties) {
-    _instance._configuration.addProperties(properties);
-  }
+		_instance._configuration.addProperties(properties);
+	}
 
   public static boolean contains (String key) {
-    return _instance._configuration.contains(key);
-  }
+		return _instance._configuration.contains(key);
+	}
 
   public static String get (String key) {
-    return _instance._configuration.get(key);
-  }
+		return _instance._configuration.get(key);
+	}
 
   public static String get (String key, Filter filter) {
-    return _instance._configuration.get(key, filter);
-  }
+		return _instance._configuration.get(key, filter);
+	}
 
   public static String[] getArray (String key) {
-    return _instance._configuration.getArray(key);
-  }
+		return _instance._configuration.getArray(key);
+	}
 
   public static String[] getArray (String key, Filter filter) {
-    return _instance._configuration.getArray(key, filter);
-  }
+		return _instance._configuration.getArray(key, filter);
+	}
 
   public static Properties getProperties () {
-    return _instance._configuration.getProperties();
-  }
+		return _instance._configuration.getProperties();
+	}
 
   public static void removeProperties (Properties properties) {
-    _instance._configuration.removeProperties(properties);
-  }
+		_instance._configuration.removeProperties(properties);
+	}
 
   public static void set (String key, String value) {
-    _instance._configuration.set(key, value);
-  }
+		_instance._configuration.set(key, value);
+	}
 
   private ServiceProps () {
-    _configuration = ConfigurationFactoryUtil.getConfiguration(getClass()
+		_configuration = ConfigurationFactoryUtil.getConfiguration(getClass()
             .getClassLoader(),
-        "service");
-  }
+				"service");
+	}
 
-  private static ServiceProps _instance = new ServiceProps();
-  private Configuration _configuration;
+	private static ServiceProps _instance = new ServiceProps();
+	private Configuration _configuration;
 }
