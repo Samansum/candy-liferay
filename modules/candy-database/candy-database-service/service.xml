@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN"
+	"http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="com.candy.database">
+	<namespace>CandyDataBase</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity local-service="true" name="Book" table="Candy_Book" remote-service="false" uuid="true">
+		<column name="bookId" type="long" primary="true"/>
+		<column name="bookTitle" type="String"/>
+		<column name="author" type="String"/>
+		<column name="publishDate" type="Date"/>
+
+		<finder name="publishDate" return-type="Collection">
+			<finder-column name="publishDate"/>
+		</finder>
+		<finder name="author" return-type="Collection">
+			<finder-column name="author"/>
+		</finder>
+		<finder name="authorPublishedOnDate" return-type="Collection">
+			<finder-column name="author"/>
+			<finder-column name="publishDate"/>
+		</finder>
+	</entity>
+</service-builder>

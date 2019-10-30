@@ -1,0 +1,10 @@
+Bundle-Name: candy-database-api
+Bundle-SymbolicName: com.candy.database.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.candy.database.exception,\
+	com.candy.database.model,\
+	com.candy.database.service,\
+	com.candy.database.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../candy-database-service/service.xml

@@ -1,0 +1,4 @@
+dependencies {
+    compileOnly "${lombok}"
+    compileOnly "${slf4j_api}"
+}

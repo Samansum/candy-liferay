@@ -1,28 +1,42 @@
 package com.candy.docs.portlet.displayContext;
 
+import com.candy.database.exception.NoSuchBookException;
+import com.candy.database.model.Book;
+import com.candy.database.service.BookLocalServiceUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.json.JSONSerializer;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class CandyDisplayContext {
 
-  public String getDataAsJson () {
-    String[] CandyData = new String[]{
-        "01%Candy%hello world",
-        "02%Choco%hello Choco",
-        "03%Hatoya%hello Toya"
-    };
-    List<JSONObject> jsonObjectsData = new ArrayList<>();
-    for (String data : CandyData) {
-      JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-      String[] entry = data.split(StringPool.PERCENT);
-      jsonObject.put("id", entry[0]);
-      jsonObject.put("name", entry[1]);
-      jsonObject.put("text", entry[2]);
-      jsonObjectsData.add(jsonObject);
+  public String getBooksAsJson () {
+    JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
+    return jsonSerializer.serializeDeep(
+        getBooks().isEmpty() ? getDefaultBooks() : getBooks()
+    );
+  }
+
+  private List<Book> getBooks () {
+    try {
+      return BookLocalServiceUtil.findAllBooks();
+    } catch (NoSuchBookException e) {
+      log.error("method=getBooks error={}", e);
+      return Collections.emptyList();
     }
-    return jsonObjectsData.toString();
+  }
+
+  private List<Book> getDefaultBooks () {
+    List<Book> defaultBooks = new ArrayList<>();
+    Book book = BookLocalServiceUtil.createBook(0);
+    book.setBookTitle("Candy's Life");
+    book.setAuthor("Candy");
+    book.setPublishDate(new Date());
+    defaultBooks.add(book);
+    return defaultBooks;
   }
 }

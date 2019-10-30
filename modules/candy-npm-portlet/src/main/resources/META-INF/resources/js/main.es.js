@@ -1,20 +1,16 @@
 import Vue from 'vue/dist/vue.common';
+import moment from 'moment';
 
-export default function(portletNamespace, candyData) {
+export default function(portletNamespace, books) {
 	new Vue({
 		el: `#${portletNamespace}candy`,
 		data: {
-			message: 'Hello from Vue.js!',
-			myData: JSON.parse(candyData),
-			checkedImage: '',
-			selectedProtocol: 'https://'
+			books: books
 		},
-
 		methods: {
-			reverseMessage: function() {
-				this.message = this.message
-					.split(' ')[0];
-			},
+      getFormatedDate(date){
+        return moment(date).format('MM/DD/YYYY hh:mma');
+      }
 		},
 	});
 
